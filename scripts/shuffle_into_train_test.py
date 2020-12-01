@@ -12,11 +12,10 @@ CLEAR_DIR = False
 INPUT_PATH = 'data/resized_combined/'
 TRAIN_PATH = 'data/train/'
 TEST_PATH = 'data/test/'
-TRAIN_RATIO = 0.70
-TEST_RATIO = 0.30
+TEST_RATIO = 0.05
 
 assert os.path.isdir(INPUT_PATH), INPUT_PATH + ' does not exist'
-assert TRAIN_RATIO+TEST_RATIO == 1, "ratios must sum to 1"
+assert TEST_RATIO >=0 and TEST_RATIO<=1, "TEST_RATIO must be between 0 and 1"
 for dir_path in [TRAIN_PATH, TEST_PATH]:
     if os.path.isdir(dir_path):
         if CLEAR_DIR and len(os.listdir(dir_path)) != 0:
@@ -32,8 +31,8 @@ input_dir = os.listdir(INPUT_PATH)
 random.shuffle(input_dir)
 
 for i,filename in enumerate(input_dir):
-    if i <= TRAIN_RATIO * len(input_dir):
-        shutil.copy(INPUT_PATH+filename, TRAIN_PATH+filename)
-    else:
+    if i <= TEST_RATIO * len(input_dir):
         shutil.copy(INPUT_PATH+filename, TEST_PATH+filename)
+    else:
+        shutil.copy(INPUT_PATH+filename, TRAIN_PATH+filename)
 
