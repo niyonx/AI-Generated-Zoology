@@ -36,7 +36,7 @@ jupyter lab
 
 ## Data folder structure (TEMPORARILY)
 data/ was temporarily added to .gitignore. We will add and create many files inside it, thus we want to avoid github having to sync thousands of files and induce lagg.\
-Just make sure that your data/ dir has the following structure:\
+Just make sure that your data/  folder has the following structure for the models to work:\
 data/\
 |--train\
 |--test\
@@ -44,15 +44,14 @@ data/\
 |--sketch-img\
 |--resized_combined
 
-Note that this is what it will look like by the end and you should just make sure to keep it like that for the scripts below to work.
-At first, you could just have it as follows, then run the scripts below and it would look like above. Or create them in advance according to strucutre above
+Note that this is what it will look like by the end of running all scripts.\
+At first, you could just have it as follows, then run the scripts below and it would look like above. Or create them in advance according to strucutre above, but make sure all, but raw-img are empty.\
 data/\
 |--raw-img
 
 ## Images to sketch
 
-Note that this will override files with the same name that already exist in sketch-img.\
-I recomend to either clear sketch-img, or move them elsewhere temporarily and add back after
+It creates the sketch-img folder if not there already.
 
 1. Input is in data/raw-img
 
@@ -78,6 +77,7 @@ Input and Output directory can be modified from scripts/test_pretrained file. [M
 Assuming you have done all the previous steps:
 
 1. Execute **resize_combine.py**\
-Will throw exception if filenames(without extension) in data/raw-img and data/sketch-img don't have a 1-to-1 corespondance.
+Will throw exception if filenames(without extension) in data/raw-img and data/sketch-img don't have a 1-to-1 corespondance.\
+If this happends, you either didn't convert to jpeg from png before sketch or didn't clear sketch files already present before running the edge detection script.
 
 2. Execute **shuffle_into_train_test.py**
