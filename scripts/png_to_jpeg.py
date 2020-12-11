@@ -7,11 +7,11 @@ from PIL import Image
 import os
 
 
-PATH = "data/raw-img/"
+PATH = "C:/Users/Dan/source/AI-Generated-Zoology/custom/Cat/"
 assert os.path.isdir(PATH), PATH + " dir doesn't exist"
 
 for filename in os.listdir(PATH):
-    if filename.split('.')[1] == 'png':
+    if filename.split('.')[1] != 'jpeg':
         print('converting file: {}'.format(filename))
         img = Image.open(PATH + filename)
         img = img.convert('RGB')
