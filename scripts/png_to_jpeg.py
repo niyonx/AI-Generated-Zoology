@@ -7,7 +7,7 @@ from PIL import Image
 import os
 
 
-PATH = "data/custom/Cat/"
+PATH = "data/raw-img/"
 assert os.path.isdir(PATH), PATH + " dir doesn't exist"
 
 for filename in os.listdir(PATH):

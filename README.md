@@ -31,53 +31,44 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-**Online**: Upload notebook on [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true).
-
-
-## Data folder structure (TEMPORARILY)
-data/ was temporarily added to .gitignore. We will add and create many files inside it, thus we want to avoid github having to sync thousands of files and induce lagg.\
-Just make sure that your data/  folder has the following structure for the models to work:\
-data/\
-|--train\
-|--test\
-|--raw-img\
-|--sketch-img\
-|--resized_combined
-
-Note that this is what it will look like by the end of running all scripts.\
-At first, you could just have it as follows, then run the scripts below and it would look like above. Or create them in advance according to strucutre above, but make sure all, but raw-img are empty.\
-data/\
-|--raw-img
 
 ## Images to sketch
-
-It creates the sketch-img folder if not there already.
-
-1. Input is in data/raw-img
-
-2. Convert all .png files to .jpeg by executing **png_to_jpeg.py** (PhotoSketch doesn't seem to work on .png files, even if it says it should)
-
-3. From PhotoSketch directory run
-
+If you start from scratch, then you only have images with background removed by some means. We used photoshop.
+1. Place all your images in 
+```
+data/raw-img/
+```
+2. Edge detection model only works on jpeg files, so convert all images by running
+```
+./scripts/png_to_jpeg.py
+```
+3. From PhotoSketch directory, run
 ```
 ./scripts/test_pretrained.sh (Linux)
 ```
 ```
 ./scripts/test_pretrained.cmd (Windows, can run from any directory or just double click on file)
 ```
+4. Sketch images should be located in:
+```
+./data/sketh-img/
+```
 
 
-4. Output sketches will be in data/sketch-img
+## Project data
+For demo purposes, we placed only a small portion of the datasets we used.\
+The full data we used for the project can be downloaded from: https://drive.google.com/file/d/1pzdkQ1OBVexu6YrW_ULHg_lUDiOu2ef1/view?usp=sharing
 
-Input and Output directory can be modified from scripts/test_pretrained file. [More info](https://github.com/mtli/PhotoSketch).
+
+## Checkpoints
+We saved our models after 500 epochs for both cats and dogs datasets.\
+However, due to their large size, we make them available at: https://drive.google.com/file/d/1TH6DImrtBW70vWCeLD5ro7tA_LRlv4qG/view?usp=sharing
 
 
-## How to generate train and test data
-
-Assuming you have done all the previous steps:
-
-1. Execute **resize_combine.py**\
-Will throw exception if filenames(without extension) in data/raw-img and data/sketch-img don't have a 1-to-1 corespondance.\
-If this happends, you either didn't convert to jpeg from png before sketch or didn't clear sketch files already present before running the edge detection script.
-
-2. Execute **shuffle_into_train_test.py**
+## Demo
+Simply run all the cells up to the RESULTS section.<br>
+DO NOT run the cells below RESULTS.<br>
+We ran those cells with the checkpoints loaded to showcase our results.<br>
+You would need to download the checkpoints to run those cells.<br>
+<br>
+We have added some of our results in *data/results(dogs)* and *data/results(cats)*
